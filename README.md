@@ -1,2 +1,2 @@
 # PicLapse
-Android app take pictures and create a Time Lapse.
+Android app that take collection pictures and create a Time Lapse from those Pictures.
