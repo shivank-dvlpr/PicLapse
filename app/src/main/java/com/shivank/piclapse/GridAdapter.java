@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class GridAdapter extends BaseAdapter {
@@ -57,7 +59,10 @@ public class GridAdapter extends BaseAdapter {
         ImageView img = view.findViewById(R.id.grid_img);
         TextView txt = view.findViewById(R.id.grid_txt);
 
-        img.setImageURI(images.get(i));
+        Glide.with(context)
+                        .load(images.get(i))
+                        .centerCrop()
+                        .into(img);
         txt.setText(imgNames.get(i));
 
 

@@ -13,11 +13,14 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    FloatingActionButton fab_addImage;
     ArrayList<Uri> images;
     ArrayList<String> imgNames;
 
@@ -38,35 +41,18 @@ public class MainActivity extends AppCompatActivity {
         images = new ArrayList<Uri>();
         imgNames = new ArrayList<String>();
 
-        addImg = findViewById(R.id.addImg);
+        //addImg = findViewById(R.id.addImg);
         gridView = findViewById(R.id.grid_view);
+        fab_addImage = (FloatingActionButton) findViewById(R.id.fab_addImage);
 
-       /* images.add(R.mipmap.ic_launcher);
-        images.add(R.mipmap.ic_launcher_round);
-        imgNames.add("1");
-        imgNames.add("2");*/
 
-        if (images.size() == 0){
-            addImg.setImageResource(R.drawable.add_photo);
-        }else {
-            addImg.setVisibility(View.GONE);
-        }
+
 
         gridAdapter = new GridAdapter(MainActivity.this,images,imgNames);
         gridView.setAdapter(gridAdapter);
 
 
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                Toast.makeText(MainActivity.this, "Clicked On "+ imgNames.get(i), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        addImg.setOnClickListener(new View.OnClickListener() {
+        fab_addImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -79,8 +65,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                Toast.makeText(MainActivity.this, "Clicked On "+ imgNames.get(i), Toast.LENGTH_SHORT).show();
 
+            }
+        });
 
 
 
@@ -96,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             int data1 = data.getClipData().getItemCount();
             //Uri uri = data.getData();
 
+            //TODO: Fix Images Sequence Names
             for (int i = 0;i < data1; i++){
                 images.add(data.getClipData().getItemAt(i).getUri());
                 imgNames.add(i+1+"");
@@ -104,13 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
             gridAdapter.notifyDataSetChanged();
 
-            if (images.size() == 0){
-                addImg.setImageResource(R.drawable.add_photo);
-            }else {
-                addImg.setVisibility(View.GONE);
-            }
 
-            //addImg.setImageURI(uri);
 
         }
 
